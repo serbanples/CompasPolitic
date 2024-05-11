@@ -3,8 +3,8 @@ import cors from 'cors';
 import express from 'express';
 import passport from 'passport';
 import session from 'express-session';
-// import initializePassport from './src/config/passportConfig.js';
-// import userRoutes from './src/routes/userRoutes.js';
+import initializePassport from './src/config/passportConfig.js';
+import userRoutes from './src/routes/userRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -30,15 +30,15 @@ app.use(
         },
     })
 );
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
-// initializePassport(passport);
+initializePassport(passport);
 
 app.use('/public', express.static('public'));
 
 // Routes
-// app.use('/api/users', userRoutes);
+app.use('/api/users', userRoutes);
 
 const startServer = async () => {
     await connectDB();  // Conectarea la baza de date
